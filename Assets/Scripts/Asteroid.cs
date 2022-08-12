@@ -15,15 +15,8 @@ public class Asteroid : MonoBehaviour
 
     Rigidbody2D _rigidbody2d;
 
-    void OnEnable()
+    void Start()
     {
-        StartCoroutine(EnableIE());
-    }
-
-    IEnumerator EnableIE()
-    {
-        GetComponent<Renderer>().enabled = false;
-
         GameManager.instance.AsteroidSpawned(gameObject);
         GameManager.instance._mapBorderTeleporter.teleportableObjects.Add(transform);
 
@@ -34,15 +27,6 @@ public class Asteroid : MonoBehaviour
             _rigidbody2d.velocity = Random.onUnitSphere;
             _rigidbody2d.velocity *= Random.Range(minMoveSpeed, maxMoveSpeed);
         }
-/* 
-        // ждём 5 кадров после спавна, чтобы не было резких прыжков
-        for (int i = 0; i < 5; i++)
-        {
-            yield return null;
-        } */
-
-        GetComponent<Renderer>().enabled = true;
-        yield return null;
     }
 
     public void SplitIntoSmaller()
@@ -51,7 +35,6 @@ public class Asteroid : MonoBehaviour
         {
             GameObject asteroidPrefab = asteroidSize == Size.Big ? GameManager.instance.asteroidPrefabMedium : GameManager.instance.asteroidPrefabSmall;
             
-            // todo asteroidSplitDegree
             Asteroid childAsteroid1 = Instantiate(asteroidPrefab, transform.position, Quaternion.identity.MakeRandomZ()).GetComponent<Asteroid>();
             Asteroid childAsteroid2 = Instantiate(asteroidPrefab, transform.position, Quaternion.identity.MakeRandomZ()).GetComponent<Asteroid>();
             

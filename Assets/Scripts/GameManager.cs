@@ -9,13 +9,11 @@ public class GameManager : MonoBehaviour
 
     int score;
     int level;
-    public float asteroidSplitDegree = 45f;
 
     public GameObject asteroidPrefabBig;
     public GameObject asteroidPrefabMedium;
     public GameObject asteroidPrefabSmall;
 
-    [SerializeField] Transform[] mapBorders;
     public Vector2 mapSize { get; set; }
 
     List<GameObject> activeAsteroids = new List<GameObject>();
@@ -41,18 +39,6 @@ public class GameManager : MonoBehaviour
 
         Camera camera = Camera.main;
         mapSize = new Vector2(camera.orthographicSize * camera.aspect, camera.orthographicSize);
-
-        mapBorders[0].position = new Vector2(-mapSize.x - 0.5f, 0f);
-        mapBorders[0].localScale = new Vector3(1f, mapSize.y * 2, 1f);
-
-        mapBorders[1].position = new Vector2(mapSize.x + 0.5f, 0f);
-        mapBorders[1].localScale = new Vector3(1f, mapSize.y * 2, 1f);
-
-        mapBorders[2].position = new Vector2(0f, -mapSize.y - 0.5f);
-        mapBorders[2].localScale = new Vector3(mapSize.x * 2, 1f, 1f);
-
-        mapBorders[3].position = new Vector2(0f, mapSize.y + 0.5f);
-        mapBorders[3].localScale = new Vector3(mapSize.x * 2, 1f, 1f);
 
         StartNextLevel();
         Time.timeScale = 1f;

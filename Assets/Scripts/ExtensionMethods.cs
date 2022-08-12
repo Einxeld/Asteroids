@@ -41,6 +41,6 @@ public static class ExtensionMethods
 
     public static void SetRandomBool(this bool _bool)
     {
-        _bool = Random.Range(0, 1) == 1;
+        _bool = Random.Range(0, 2) == 1;
     }
 }
