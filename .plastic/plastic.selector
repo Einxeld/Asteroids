@@ -1,0 +1,4 @@
+repository "Asteroids@Einxeld@cloud"
+  path "/"
+    br "/main"
+    co "/main"
